@@ -1,18 +1,29 @@
-#include <stdio.h>
-int z=10;
-void func()
-{
-    int y;
-    printf("剛進來func()時, z是%d\n", z);
-    z = 2;
-    printf("在func()裡把z改成%d\n", z);
-}
-int main()
-{
-    int x;
-    func();
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* swapPairs(ListNode* head) {
+        if(head==nullptr || head->next==nullptr)return head;
 
-    printf("在main()裡, z的值是%d\n", z);
-    z = 1;
-    printf("在main()裡改 z的值, 現在是%d\n", z);
-}
+        ListNode* one = head;
+        ListNode* two = head->next;
+        while(one!=nullptr && two!=nullptr){
+            int temp = one->val;
+            one->val = two->val;
+            two->val = temp;
+            if(one->next!=nullptr)one = one -> next -> next;
+            else break;
+            if(two->next!=nullptr)two = two-> next -> next;
+            else break;
+        }
+        return head;
+    }
+};
